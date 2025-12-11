@@ -1,56 +1,23 @@
-import { NextResponse } from "next/server";
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  const category = searchParams.get("category") || 9; // default
 
-// ✅ Decodifica entità HTML
-function decodeHTML(html) {
-  return html
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+  const apiUrl = `https://opentdb.com/api.php?amount=10&category=${category}&type=multiple`;
+
+  const res = await fetch(apiUrl);
+  const data = await res.json();
+
+  // Convertiamo il formato OpenTDB nel tuo formato
+  const questions = data.results.map((q) => ({
+    question: q.question,
+    correct: q.correct_answer,
+    answers: shuffle([q.correct_answer, ...q.incorrect_answers]),
+  }));
+
+  return Response.json(questions);
 }
 
-// ✅ Shuffle
+// Funzione per mischiare le risposte
 function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
-}
-
-export async function GET() {
-  try {
-    // 1. Ottieni token
-    const tokenRes = await fetch("https://opentdb.com/api_token.php?command=request");
-    const tokenData = await tokenRes.json();
-    const token = tokenData.token;
-
-    // 2. Richiedi domande
-    const res = await fetch(
-      `https://opentdb.com/api.php?amount=5&type=multiple&token=${token}`
-    );
-
-    const data = await res.json();
-
-    if (!data.results) {
-      console.error("OpenTDB non ha restituito results:", data);
-      return NextResponse.json([], { status: 200 });
-    }
-
-    // 3. Formattazione lato server
-    const formatted = data.results.map((q) => {
-      const question = decodeHTML(q.question);
-      const correct = decodeHTML(q.correct_answer);
-      const incorrect = q.incorrect_answers.map((a) => decodeHTML(a));
-
-      return {
-        question,
-        answers: shuffle([correct, ...incorrect]),
-        correct,
-      };
-    });
-
-    return NextResponse.json(formatted);
-
-  } catch (err) {
-    console.error("Errore server:", err);
-    return NextResponse.json([], { status: 200 }); // ✅ mai 500
-  }
 }

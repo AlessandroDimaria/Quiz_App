@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function Home() {
+export default function QuizPage() {
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
+
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -11,16 +15,20 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [showAnswers, setShowAnswers] = useState(false);
 
-  // ✅ Caricamento domande
+  // ✅ Carica domande in base alla categoria
   useEffect(() => {
-    fetch("/api/quiz")
+    if (!category) return;
+
+    setLoading(true);
+
+    fetch(`/api/quiz?category=${category}`)
       .then((res) => res.json())
       .then((data) => {
         setQuestions(data);
         setLoading(false);
       })
       .catch((err) => console.error("Errore:", err));
-  }, []);
+  }, [category]);
 
   // ✅ Timer
   useEffect(() => {
@@ -62,7 +70,9 @@ export default function Home() {
     return (
       <div className="p-6 max-w-xl mx-auto text-center">
         <h1 className="text-3xl font-bold mb-4">Quiz finito!</h1>
-        <p className="text-xl mb-6">Punteggio: {score} / {questions.length}</p>
+        <p className="text-xl mb-6">
+          Punteggio: {score} / {questions.length}
+        </p>
 
         <h2 className="text-2xl font-semibold mb-4">Risposte corrette</h2>
 
@@ -83,9 +93,9 @@ export default function Home() {
 
         <button
           className="mt-6 px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={() => window.location.reload()}
+          onClick={() => window.location.href = "/"}
         >
-          Rifai il quiz
+          Torna alle categorie
         </button>
       </div>
     );
@@ -96,7 +106,9 @@ export default function Home() {
   return (
     <div className="p-6 max-w-xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <div className="text-lg font-semibold">⏳ {time}s</div>
+       <div className={`text-lg font-semibold ${time <= 5 ? "animate-pulse text-red-400" : ""}`}>
+  ⏳ {time}s
+</div>
       </div>
 
       <h1
