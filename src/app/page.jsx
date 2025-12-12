@@ -16,17 +16,11 @@ export default function Home() {
       <div className="particle" style={{ top: "36%", left: "35%", animationDelay: "1.2s" }}></div>
 
       {/* TITOLO */}
-      <h1
-        className="
-          text-7xl font-extrabold text-center 
-          bg-gradient-to-br from-[#ffe066] to-[#ffcc00] 
-          bg-clip-text text-transparent
-          drop-shadow-[0_0_25px_rgba(255,230,102,0.8)]
-          mb-16
-        "
-      >
-        Quiz Master
-      </h1>
+<h1
+  className="text-7xl font-extrabold text-center bg-gradient-to-br from-[#ffe066] to-[#ffcc00] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,230,102,0.8)] mb-16"
+>
+  Quiz Master
+</h1>
 
       {/* PARTICELLE ATTORNO AL BOTTONE */}
       <div className="particle" style={{ top: "55%", left: "47%", animationDelay: "0.2s" }}></div>
