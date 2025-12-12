@@ -32,7 +32,7 @@ export default function Home() {
       {/* BOTTONE */}
       <button
         onClick={() => router.push("/categories")}
-        className="w-32 h-32 rounded-full text-black text-3xl font-semibold flex items-center justify-center relative"
+        className="w-32 h-32 rounded-full text-black text-3xl font-semibold flex items-center justify-center relative cursor-pointer"
         style={{
           background: "radial-gradient(circle, #ffe066, #ffcc00)",
           boxShadow: "0 0 25px rgba(255, 230, 102, 0.7)",

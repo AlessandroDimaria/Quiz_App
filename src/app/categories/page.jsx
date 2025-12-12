@@ -33,7 +33,7 @@ return (
           <button
             key={cat.id}
             onClick={() => selectCategory(cat.id)}
-            className="p-4 rounded-xl text-lg font-semibold bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,230,102,0.9)] transition-all duration-300"
+            className="p-4 rounded-xl text-lg font-semibold bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,230,102,0.9)] transition-all duration-300 cursor-pointer"
           >
             {cat.name}
           </button>

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
 export default function QuizPage() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
-
+ const router = useRouter(); 
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -14,6 +15,7 @@ export default function QuizPage() {
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showAnswers, setShowAnswers] = useState(false);
+  const [userAnswers, setUserAnswers] = useState([]);
 
   // ✅ Carica domande
   useEffect(() => {
@@ -41,11 +43,29 @@ export default function QuizPage() {
 
   const handleTimeout = () => {
     setSelected("timeout");
+      // ✅ Salva risposta "tempo scaduto"
+  setUserAnswers((prev) => [
+    ...prev,
+    {
+      question: questions[index].question,
+      correct: questions[index].correct,
+      chosen: "Tempo scaduto"
+    }
+  ]);
     setTimeout(nextQuestion, 1200);
   };
 
   const answerClick = (ans) => {
     if (selected) return;
+  // ✅ Salva la risposta data
+  setUserAnswers((prev) => [
+    ...prev,
+    {
+      question: questions[index].question,
+      correct: questions[index].correct,
+      chosen: ans
+    }
+  ]);
 
     setSelected(ans);
     if (ans === questions[index].correct) setScore((s) => s + 1);
@@ -71,32 +91,70 @@ export default function QuizPage() {
     );
 
   // ✅ Schermata finale
-  if (showAnswers) {
-    return (
-      <div className="min-h-screen bg-[#1c192b] text-white flex flex-col items-center justify-center p-6 page-slide-right">
-        <h1 className="text-4xl font-bold mb-4 drop-shadow-[0_0_10px_rgba(255,230,102,0.7)]">
-          Quiz finito!
-        </h1>
+if (showAnswers) {
+  return (
+    <div className="min-h-screen bg-[#1c192b] text-white p-6 flex flex-col items-center page-slide-right">
+      
+      <h1 className="text-4xl font-bold mb-4 drop-shadow-[0_0_10px_rgba(255,230,102,0.7)]">
+        Quiz finito!
+      </h1>
 
-        <p className="text-2xl mb-6 text-[#ffe066]">
-          Punteggio: {score} / {questions.length}
-        </p>
+      <p className="text-2xl mb-6 text-[#ffe066]">
+        Punteggio: {score} / {questions.length}
+      </p>
 
-        <button
-          className="px-6 py-3 rounded-xl bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black font-semibold shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 transition"
-          onClick={() => (window.location.href = "/categories")}
-        >
-          Torna alle categorie
-        </button>
-      </div>
-    );
-  }
+      <h2 className="text-2xl font-semibold mb-4">Le tue risposte</h2>
+
+      <ul className="w-full max-w-xl space-y-4">
+        {userAnswers.map((item, i) => {
+          const isCorrect = item.chosen === item.correct;
+
+          return (
+            <li key={i} className="p-4 rounded-xl bg-[#2a2540] shadow">
+              <p
+                className="font-semibold mb-2"
+                dangerouslySetInnerHTML={{ __html: `${i + 1}. ${item.question}` }}
+              />
+
+              <p className={`mb-1 ${isCorrect ? "text-green-400" : "text-red-400"}`}>
+                Tua risposta:{" "}
+                <span dangerouslySetInnerHTML={{ __html: item.chosen }} />
+              </p>
+
+              {!isCorrect && (
+                <p className="text-green-400">
+                  Corretta:{" "}
+                  <span dangerouslySetInnerHTML={{ __html: item.correct }} />
+                </p>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+
+      <button
+        className="mt-8 px-6 py-3 rounded-xl bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black font-semibold shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 transition cursor-pointer"
+        onClick={() => router.push("/categories")}
+      >
+        Torna alle categorie
+      </button>
+    </div>
+  );
+}
 
   const q = questions[index];
 
   return (
     <div className="min-h-screen w-full bg-[#1c192b] text-white p-6 flex justify-center items-center">
       <div className="max-w-xl w-full page-slide-right">
+        <div className="max-w-xl w-full page-slide-right">
+          <button
+        onClick={() => router.push("/categories")}
+        className="mb-6 px-4 py-2 rounded-lg bg-[#2a2540] text-[#ffe066] font-semibold hover:scale-105 transition cursor-pointer"
+        >
+       ⬅️ Torna alle categorie
+       </button>
+        </div>
 
         {/* TIMER */}
         <div className="flex justify-between items-center mb-6">
@@ -126,7 +184,7 @@ export default function QuizPage() {
         key={i}
         onClick={() => answerClick(ans)}
         disabled={selected !== null}
-        className={`w-full p-4 rounded-xl text-lg font-semibold transition-all duration-300 bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,230,102,0.9)]  
+        className={`w-full p-4 rounded-xl text-lg font-semibold transition-all duration-300 bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,230,102,0.9)] cursor-pointer 
           ${selected !== null && isCorrect ? "bg-green-500 text-white from-green-500 to-green-600 shadow-green-500" : ""}
           ${selected !== null && isSelected && !isCorrect ? "bg-red-500 text-white from-red-500 to-red-600 shadow-red-500" : ""}
           ${selected !== null && !isSelected && !isCorrect ? "opacity-40" : ""}
