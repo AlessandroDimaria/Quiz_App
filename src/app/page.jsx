@@ -17,7 +17,7 @@ export default function Home() {
 
       {/* TITOLO */}
 <h1
-  className="text-7xl font-extrabold text-center bg-gradient-to-br from-[#ffe066] to-[#ffcc00] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,230,102,0.8)] mb-16"
+  className="text-7xl font-extrabold text-center bg-linear-to-br from-[#ffe066] to-[#ffcc00] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,230,102,0.8)] mb-16"
 >
   Quiz Master
 </h1>
