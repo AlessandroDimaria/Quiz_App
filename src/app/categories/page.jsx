@@ -20,21 +20,27 @@ export default function Categories() {
     router.push(`/quiz?category=${id}`);
   }
 
-  return (
-            <div className="page-slide-right p-6 max-w-xl mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-6">Scegli una categoria</h1>
+return (
+  <div className="min-h-screen w-full bg-[#1c192b] page-slide-right flex justify-center">
+    <div className="p-6 max-w-xl w-full">
+      
+      <h1 className="text-3xl font-bold text-center mb-6 text-white">
+        Scegli una categoria
+      </h1>
 
       <div className="grid grid-cols-1 gap-4">
         {categories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => selectCategory(cat.id)}
-            className="p-4 bg-gray-200 rounded-lg hover:bg-gray-300 transition text-lg"
+            className="p-4 rounded-xl text-lg font-semibold bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,230,102,0.9)] transition-all duration-300"
           >
             {cat.name}
           </button>
         ))}
       </div>
+
     </div>
-  );
+  </div>
+);
 }

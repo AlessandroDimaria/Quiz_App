@@ -15,7 +15,7 @@ export default function QuizPage() {
   const [loading, setLoading] = useState(true);
   const [showAnswers, setShowAnswers] = useState(false);
 
-  // ✅ Carica domande in base alla categoria
+  // ✅ Carica domande
   useEffect(() => {
     if (!category) return;
 
@@ -63,37 +63,28 @@ export default function QuizPage() {
     }
   };
 
-  if (loading) return <p className="p-4">Caricamento...</p>;
+  if (loading)
+    return (
+      <div className="min-h-screen bg-[#1c192b] flex items-center justify-center text-white text-xl">
+        Caricamento...
+      </div>
+    );
 
   // ✅ Schermata finale
   if (showAnswers) {
     return (
-      <div className="p-6 max-w-xl mx-auto text-center">
-        <h1 className="text-3xl font-bold mb-4">Quiz finito!</h1>
-        <p className="text-xl mb-6">
+      <div className="min-h-screen bg-[#1c192b] text-white flex flex-col items-center justify-center p-6 page-slide-right">
+        <h1 className="text-4xl font-bold mb-4 drop-shadow-[0_0_10px_rgba(255,230,102,0.7)]">
+          Quiz finito!
+        </h1>
+
+        <p className="text-2xl mb-6 text-[#ffe066]">
           Punteggio: {score} / {questions.length}
         </p>
 
-        <h2 className="text-2xl font-semibold mb-4">Risposte corrette</h2>
-
-        <ul className="text-left space-y-4">
-          {questions.map((q, i) => (
-            <li key={i}>
-              <div
-                className="font-semibold"
-                dangerouslySetInnerHTML={{ __html: `${i + 1}. ${q.question}` }}
-              />
-              <div
-                className="text-green-600"
-                dangerouslySetInnerHTML={{ __html: q.correct }}
-              />
-            </li>
-          ))}
-        </ul>
-
         <button
-          className="mt-6 px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={() => window.location.href = "/categories"}
+          className="px-6 py-3 rounded-xl bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black font-semibold shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 transition"
+          onClick={() => (window.location.href = "/categories")}
         >
           Torna alle categorie
         </button>
@@ -104,47 +95,51 @@ export default function QuizPage() {
   const q = questions[index];
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <div className="flex justify-between items-center mb-4">
-       <div className={`text-lg font-semibold ${time <= 5 ? "animate-pulse text-red-400" : ""}`}>
-  ⏳ {time}s
-</div>
-      </div>
+    <div className="min-h-screen w-full bg-[#1c192b] text-white p-6 flex justify-center items-center">
+      <div className="max-w-xl w-full page-slide-right">
 
-      <h1
-        className="text-xl font-bold mb-4"
-        dangerouslySetInnerHTML={{ __html: q.question }}
+        {/* TIMER */}
+        <div className="flex justify-between items-center mb-6">
+          <div
+            className={`text-xl font-semibold ${
+              time <= 5 ? "text-red-400 animate-pulse" : "text-[#ffe066]"
+            }`}
+          >
+            ⏳ {time}s
+          </div>
+        </div>
+
+        {/* DOMANDA */}
+        <h1
+          className="text-2xl font-bold mb-6 drop-shadow-[0_0_10px_rgba(255,230,102,0.6)]"
+          dangerouslySetInnerHTML={{ __html: q.question }}
+        />
+
+        {/* RISPOSTE */}
+<div className="space-y-4">
+  {q.answers.map((ans, i) => {
+    const isCorrect = ans === q.correct;
+    const isSelected = ans === selected;
+
+    return (
+      <button
+        key={i}
+        onClick={() => answerClick(ans)}
+        disabled={selected !== null}
+        className={`w-full p-4 rounded-xl text-lg font-semibold transition-all duration-300 bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 hover:shadow-[0_0_25px_rgba(255,230,102,0.9)]  
+          ${selected !== null && isCorrect ? "bg-green-500 text-white from-green-500 to-green-600 shadow-green-500" : ""}
+          ${selected !== null && isSelected && !isCorrect ? "bg-red-500 text-white from-red-500 to-red-600 shadow-red-500" : ""}
+          ${selected !== null && !isSelected && !isCorrect ? "opacity-40" : ""}
+        `}
+        dangerouslySetInnerHTML={{ __html: ans }}
       />
-
-      <div className="space-y-3">
-        {q.answers.map((ans, i) => {
-          const isCorrect = ans === q.correct;
-          const isSelected = ans === selected;
-
-          const style =
-            selected === null
-              ? ""
-              : isCorrect
-              ? "bg-green-300 dark:bg-green-700"
-              : isSelected
-              ? "bg-red-300 dark:bg-red-700"
-              : "opacity-50";
-
-          return (
-            <button
-              key={i}
-              onClick={() => answerClick(ans)}
-              disabled={selected !== null}
-              className={`w-full p-3 border rounded transition ${style}`}
-              dangerouslySetInnerHTML={{ __html: ans }}
-            />
-          );
-        })}
+    );
+  })}
+</div>
+        <p className="mt-6 text-sm opacity-70 text-center">
+          Domanda {index + 1} di {questions.length}
+        </p>
       </div>
-
-      <p className="mt-4 text-sm opacity-70">
-        Domanda {index + 1} di {questions.length}
-      </p>
     </div>
   );
 }

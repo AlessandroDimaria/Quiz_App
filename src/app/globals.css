@@ -64,7 +64,7 @@ body {
 
 /* Transizione da destra */
 .page-slide-right {
-  animation: slideRight 1s ease forwards;
+  animation: slideRight 1s ease, fadeIn 0.6s ease;
 }
 
 @keyframes slideRight {
