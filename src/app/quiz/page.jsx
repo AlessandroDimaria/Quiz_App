@@ -93,7 +93,7 @@ export default function QuizPage() {
 
         <button
           className="mt-6 px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={() => window.location.href = "/"}
+          onClick={() => window.location.href = "/categories"}
         >
           Torna alle categorie
         </button>
