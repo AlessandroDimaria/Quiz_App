@@ -89,7 +89,15 @@ export default function QuizPage() {
         Caricamento...
       </div>
     );
+const q = questions[index];
 
+if (!q) {
+  return (
+    <div className="min-h-screen bg-[#1c192b] flex items-center justify-center text-white text-xl">
+      Errore nel caricamento delle domande
+    </div>
+  );
+}
   // ✅ Schermata finale
 if (showAnswers) {
   return (
@@ -142,7 +150,7 @@ if (showAnswers) {
   );
 }
 
-  const q = questions[index];
+
 
   return (
     <div className="min-h-screen w-full bg-[#1c192b] text-white p-6 flex justify-center items-center">
