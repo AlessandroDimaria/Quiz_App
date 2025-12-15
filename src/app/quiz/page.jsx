@@ -134,7 +134,10 @@ export default function QuizPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#1c192b] flex items-center justify-center text-white text-xl">
-        Caricamento...
+         <img 
+        src="loading.gif" 
+        alt="Caricamento..." 
+      />
       </div>
     );
   }
