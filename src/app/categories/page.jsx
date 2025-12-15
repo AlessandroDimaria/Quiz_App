@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-const categories = [
+export const categories = [
   { id: 9, name: "General Knowledge" },
   { id: 21, name: "Sports" },
   { id: 23, name: "History" },
@@ -39,7 +39,12 @@ return (
           </button>
         ))}
       </div>
-
+<button
+  onClick={() => router.push("/leaderboard")}
+  className="px-4 py-2 rounded-lg bg-[#2a2540] text-[#ffe066] font-semibold hover:scale-105 transition cursor-pointer"
+>
+  Vai alla leaderboard
+</button>
     </div>
   </div>
 );
