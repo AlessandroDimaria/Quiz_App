@@ -35,7 +35,7 @@ export default function Stats() {
         >
           ⬅️ Torna alle categorie
         </button>
-<div className="space-y-6 max-w-xl mx-auto">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
   {entries.map(([id, entry]) => (
     <div
       key={id}
@@ -45,23 +45,23 @@ export default function Stats() {
         {entry.categoryName}
       </h2>
 
-      <div className="grid grid-cols-2 gap-4 text-sm">
-        <div className="bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
+      <div className="space-y-3 text-sm">
+        <div className="flex items-center justify-between bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
           <p className="text-[#ffe066] font-semibold">Partite Giocate</p>
           <p className="text-white text-lg font-bold">{entry.plays}</p>
         </div>
 
-        <div className="bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
+        <div className="flex items-center justify-between bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
           <p className="text-[#ffe066] font-semibold">BestScore</p>
           <p className="text-green-400 text-lg font-bold">{entry.bestScore}</p>
         </div>
 
-        <div className="bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
+        <div className="flex items-center justify-between bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
           <p className="text-[#ffe066] font-semibold">Ultimo Punteggio</p>
           <p className="text-blue-400 text-lg font-bold">{entry.lastScore}</p>
         </div>
 
-        <div className="bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
+        <div className="flex items-center justify-between bg-[#2f2944] p-3 rounded-xl border border-[#3a3450]">
           <p className="text-[#ffe066] font-semibold">Media Punteggio</p>
           <p className="text-purple-400 text-lg font-bold">
             {entry.averageScore.toFixed(2)}
@@ -71,6 +71,4 @@ export default function Stats() {
     </div>
   ))}
 </div>
-    </div>
-  );
-}
+</div>)}
