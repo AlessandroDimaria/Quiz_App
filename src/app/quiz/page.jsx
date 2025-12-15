@@ -60,7 +60,7 @@ export default function QuizPage() {
   function saveScoreToLeaderboard(categoryId, score, total) {
     if (!categoryId) return; // extra sicurezza
 
-    const key = "quizLeaderboard";
+    const key = "quizStats";
     const raw = typeof window !== "undefined" ? localStorage.getItem(key) : null;
     const data = raw ? JSON.parse(raw) : {};
 

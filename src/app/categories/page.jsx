@@ -40,10 +40,10 @@ return (
         ))}
       </div>
 <button
-  onClick={() => router.push("/leaderboard")}
-  className="px-4 py-2 rounded-lg bg-[#2a2540] text-[#ffe066] font-semibold hover:scale-105 transition cursor-pointer"
+  onClick={() => router.push("/stats")}
+  className="mb-8 px-6 py-3 rounded-xl mt-4 bg-[#2a2540] text-[#ffe066] font-semibold hover:scale-105 transition-all"
 >
-  Vai alla leaderboard
+  ⬅️ Statistiche Giocatore
 </button>
     </div>
   </div>
