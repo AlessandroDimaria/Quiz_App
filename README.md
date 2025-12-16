@@ -49,7 +49,7 @@ Tutte le tue statistiche vengono salvate e vi si accede dal menu `Statistiche Gi
 
 - **Frontend**: Next.js 16 + React
 - **Stile**: Tailwind CSS con gradienti personalizzati
-- **Dati**: API endpoint `/app/api/quiz`
+- **Dati**: API endpoint `/app/api/quiz/route`
 - **Persistenza**: localStorage
 - **Animazioni**: Keyframes + hover effects
 - **🎵 Audio**: HTML5 Audio
