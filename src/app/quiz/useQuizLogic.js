@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { playSound } from "../../lib/audio";
+import {saveUserStats} from "../../lib/userStats"
 import { categories } from "../categories/page";
 
 export default function useQuizLogic(category) {
@@ -45,40 +46,14 @@ export default function useQuizLogic(category) {
   // -----------------------------
   // SALVATAGGIO PUNTEGGIO
   // -----------------------------
-  useEffect(() => {
-    if (showAnswers) {
-      saveScoreToLeaderboard(category, score, questions.length);
-    }
-  }, [showAnswers]);
-
-  function saveScoreToLeaderboard(categoryId, score, total) {
-    if (!categoryId) return;
-
-    const key = "quizStats";
-    const raw = localStorage.getItem(key);
-    const data = raw ? JSON.parse(raw) : {};
-
+useEffect(() => {
+  if (showAnswers) {
     const categoryName =
-      categories.find((c) => c.id == categoryId)?.name || "Categoria";
+      categories.find((c) => c.id == category)?.name || "Categoria";
 
-    const entry = data[categoryId] || {
-      categoryName,
-      plays: 0,
-      bestScore: 0,
-      lastScore: 0,
-      averageScore: 0,
-    };
-
-    entry.plays += 1;
-    entry.lastScore = score;
-    entry.bestScore = Math.max(entry.bestScore, score);
-    entry.averageScore =
-      ((entry.averageScore * (entry.plays - 1)) + score) / entry.plays;
-
-    data[categoryId] = entry;
-
-    localStorage.setItem(key, JSON.stringify(data));
+    saveUserStats(category, categoryName, score);
   }
+}, [showAnswers]);
 
   // -----------------------------
   // TIMEOUT
