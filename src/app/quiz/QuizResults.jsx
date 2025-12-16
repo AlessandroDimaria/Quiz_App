@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import {playSound} from "../../lib/audio.js"; 
 
 export default function QuizResults({ score, questions, userAnswers }) {
   const router = useRouter();
@@ -53,7 +54,10 @@ export default function QuizResults({ score, questions, userAnswers }) {
       {/* BOTTONE TORNA ALLE CATEGORIE */}
       <button
         className="mt-8 px-6 py-3 rounded-xl bg-linear-to-br from-[#ffe066] to-[#ffcc00] text-black font-semibold shadow-[0_0_15px_rgba(255,230,102,0.6)] hover:scale-105 transition cursor-pointer"
-        onClick={() => router.push("/categories")}
+          onClick={() => {
+                   playSound("/sounds/start.wav", 0.4);
+                   router.push("/categories");
+                   }}
       >
         Torna alle categorie
       </button>

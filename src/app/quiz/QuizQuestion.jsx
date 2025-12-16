@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import {playSound} from "../../lib/audio.js"; 
 
 export default function QuizQuestion({
   questions,
@@ -18,7 +19,10 @@ export default function QuizQuestion({
 
         {/* BOTTONE TORNA ALLE CATEGORIE */}
         <button
-          onClick={() => router.push("/categories")}
+            onClick={() => {
+           playSound("/sounds/start.wav", 0.4);
+           router.push("/categories");
+           }}
           className="mb-6 px-4 py-2 rounded-lg bg-[#2a2540] text-[#ffe066] font-semibold hover:scale-105 transition cursor-pointer"
         >
           ⬅️ Torna alle categorie

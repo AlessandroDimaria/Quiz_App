@@ -42,7 +42,11 @@ return (
         ))}
       </div>
 <button
-  onClick={() => router.push("/stats")}
+   onClick={() => {
+    playSound("/sounds/start.wav", 0.4);
+    router.push("/stats");
+  }}
+
   className="mb-8 px-6 py-3 rounded-xl mt-4 bg-[#2a2540] text-[#ffe066] font-semibold hover:scale-105 transition-all cursor-pointer"
 >
 Statistiche Giocatore ➡️
