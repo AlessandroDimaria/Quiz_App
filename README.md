@@ -41,9 +41,9 @@ Ogni quiz salva automaticamente i tuoi risultati nel browser! Per ogni categoria
 | **Risultati finali** | Punteggio totale + dettaglio ogni risposta |
 | **Statistiche** | Progressi per categoria (salvate automaticamente) |
 
-## 💾 Dove sono salvate le statistiche?
+## 💾 Dati Giocatore
 
-Tutte le tue statistiche sono salvate nel **localStorage** del browser e vi si accede dal menu `Statistiche Giocatore`.
+Tutte le tue statistiche vengono salvate e vi si accede dal menu `Statistiche Giocatore`.
 
 ## 🔧 Tecnologie Usate
 
@@ -62,3 +62,5 @@ Tutte le tue statistiche sono salvate nel **localStorage** del browser e vi si a
 3. **Buona fortuna!** 🍀
 
 **Punteggio perfetto = 10/10** 🏆
+
+[![Deploy su Vercel](https://vercel.com/button)](https://quiz-app-zeta-murex.vercel.app/)
