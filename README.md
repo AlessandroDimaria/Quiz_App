@@ -33,22 +33,24 @@ Ogni quiz salva automaticamente i tuoi risultati nel browser! Per ogni categoria
 
 | Schermata | Cosa vedrai |
 |-----------|-------------|
-| **Caricamento** | Animazione loading.gif |
+| **Start** | Schermata di inizio con bottone per accedere alle categorie |
+| **Categorie** | Lista delle categorie da scegliere |
+| **Caricamento** | Animazione loading.gif dopo aver scelto una categoria|
 | **Quiz in corso** | Timer ⏳, domanda, 4 opzioni risposta |
 | **Risultati finali** | Punteggio totale + dettaglio ogni risposta |
 | **Statistiche** | Progressi per categoria (salvate automaticamente) |
 
 ## 💾 Dove sono salvate le statistiche?
 
-Tutte le tue statistiche sono salvate nel **localStorage** del browser con la chiave `quizStats`. Non preoccuparti, i tuoi record sono al sicuro!
+Tutte le tue statistiche sono salvate nel **localStorage** del browser e vi si accede dal menu `Statistiche Giocatore`.
 
 ## 🔧 Tecnologie Usate
 
-Frontend: Next.js 14 + React
-Stile: Tailwind CSS con gradienti personalizzati
-Dati: API endpoint /api/quiz
-Persistenza: localStorage
-Animazioni: Keyframes + hover effects
+- **Frontend**: Next.js 14 + React
+- **Stile**: Tailwind CSS con gradienti personalizzati
+- **Dati**: API endpoint `/app/api/quiz`
+- **Persistenza**: localStorage
+- **Animazioni**: CSS transitions + hover effects
 
 
 ## 🎯 Pronto a iniziare?
