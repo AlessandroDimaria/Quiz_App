@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+🧠 Quiz Master - Sfida la tua conoscenza!
+Benvenuto nel Quiz Master, il quiz interattivo più divertente del web! Scegli la tua categoria preferita, rispondi a 10 domande a tempo e scopri quanto sei esperto!
 
-## Getting Started
+🎮 Come funziona
+Scegli una categoria dal menu principale
 
-First, run the development server:
+Rispondi a 10 domande entro 15 secondi ciascuna
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Guadagna punti rispondendo correttamente
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Scopri il tuo punteggio finale e consulta le statistiche personali
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+📊 Le tue Statistiche Personali
+Ogni quiz salva automaticamente i tuoi risultati nel browser! Per ogni categoria vedrai:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+text
+🏆 Categoria: Storia
+🎯 Partite giocate: 5
+⭐ Miglior punteggio: 9/10
+📈 Ultimo punteggio: 7/10  
+📊 Media punteggio: 7.6/10
+🚀 Caratteristiche Principali
+10 domande uniche per ogni categoria
 
-## Learn More
+Timer da 15 secondi per aumentare l'adrenalina
 
-To learn more about Next.js, take a look at the following resources:
+Feedback immediato (verde=corretto, rosso=sbagliato)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Statistiche salvate localmente - non perdi mai i progressi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Design moderno con animazioni fluide
 
-## Deploy on Vercel
+Risposte dettagliate alla fine del quiz
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🎨 Interfaccia Utente
+Schermata	Cosa vedrai
+Caricamento	Animazione loading.gif
+Quiz in corso	Timer ⏳, domanda, 4 opzioni risposta
+Risultati finali	Punteggio totale + dettaglio ogni risposta
+Statistiche	Progressi per categoria (salvate automaticamente)
+💾 Dove sono salvate le statistiche?
+Tutte le tue statistiche sono salvate nel localStorage del browser con la chiave quizStats. Non preoccuparti, i tuoi record sono al sicuro!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🔧 Tecnologie Usate
+text
+Frontend: Next.js 14 + React
+Stile: Tailwind CSS con gradienti personalizzati
+Dati: API endpoint /api/quiz
+Persistenza: localStorage
+Animazioni: CSS transitions + hover effects
+🎯 Pronto a iniziare?
+Vai su /categories
+
+Scegli la tua categoria preferita
+
+Buona fortuna! 🍀
+
+Punteggio perfetto = 10/10 🏆
