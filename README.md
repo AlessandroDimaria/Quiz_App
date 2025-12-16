@@ -39,7 +39,7 @@ Ogni quiz salva automaticamente i tuoi risultati nel browser! Per ogni categoria
 | **Caricamento** | Animazione loading.gif dopo aver scelto una categoria|
 | **Quiz in corso** | Timer ⏳, domanda, 4 opzioni risposta |
 | **Risultati finali** | Punteggio totale + dettaglio ogni risposta |
-| **Statistiche** | Progressi per categoria (salvate automaticamente) |
+| **Statistiche** | Progressi giocatore per ogni categoria (salvate automaticamente) |
 
 ## 💾 Dati Giocatore
 
@@ -47,7 +47,7 @@ Tutte le tue statistiche vengono salvate e vi si accede dal menu `Statistiche Gi
 
 ## 🔧 Tecnologie Usate
 
-- **Frontend**: Next.js 14 + React
+- **Frontend**: Next.js 16 + React
 - **Stile**: Tailwind CSS con gradienti personalizzati
 - **Dati**: API endpoint `/app/api/quiz`
 - **Persistenza**: localStorage
