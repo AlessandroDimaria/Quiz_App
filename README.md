@@ -1,58 +1,60 @@
-🧠 Quiz Master - Sfida la tua conoscenza!
-Benvenuto nel Quiz Master, il quiz interattivo più divertente del web! Scegli la tua categoria preferita, rispondi a 10 domande a tempo e scopri quanto sei esperto!
+# 🧠 Quiz Master - Sfida la tua conoscenza!
 
-🎮 Come funziona
-Scegli una categoria dal menu principale
+Benvenuto nel **Quiz Master**, il quiz interattivo più divertente del web! Scegli la tua categoria preferita, rispondi a **10 domande a tempo** e scopri quanto sei esperto!
 
-Rispondi a 10 domande entro 15 secondi ciascuna
+## 🎮 Come funziona
 
-Guadagna punti rispondendo correttamente
+1. **Scegli una categoria** dal menu principale
+2. **Rispondi a 10 domande** entro **15 secondi ciascuna**
+3. **Guadagna punti** rispondendo correttamente
+4. **Scopri il tuo punteggio finale** e consulta le **statistiche personali**
 
-Scopri il tuo punteggio finale e consulta le statistiche personali
+## 📊 Le tue Statistiche Personali
 
-📊 Le tue Statistiche Personali
 Ogni quiz salva automaticamente i tuoi risultati nel browser! Per ogni categoria vedrai:
 
-text
 🏆 Categoria: Storia
 🎯 Partite giocate: 5
 ⭐ Miglior punteggio: 9/10
-📈 Ultimo punteggio: 7/10  
+📈 Ultimo punteggio: 7/10
 📊 Media punteggio: 7.6/10
-🚀 Caratteristiche Principali
-10 domande uniche per ogni categoria
 
-Timer da 15 secondi per aumentare l'adrenalina
 
-Feedback immediato (verde=corretto, rosso=sbagliato)
+## 🚀 Caratteristiche Principali
 
-Statistiche salvate localmente - non perdi mai i progressi
+- **10 domande uniche** per ogni categoria
+- **Timer da 15 secondi** per aumentare l'adrenalina
+- **Feedback immediato** (verde=corretto, rosso=sbagliato)
+- **Statistiche salvate localmente** - non perdi mai i progressi
+- **Design moderno** con animazioni fluide
+- **Risposte dettagliate** alla fine del quiz
 
-Design moderno con animazioni fluide
+## 🎨 Interfaccia Utente
 
-Risposte dettagliate alla fine del quiz
+| Schermata | Cosa vedrai |
+|-----------|-------------|
+| **Caricamento** | Animazione loading.gif |
+| **Quiz in corso** | Timer ⏳, domanda, 4 opzioni risposta |
+| **Risultati finali** | Punteggio totale + dettaglio ogni risposta |
+| **Statistiche** | Progressi per categoria (salvate automaticamente) |
 
-🎨 Interfaccia Utente
-Schermata	Cosa vedrai
-Caricamento	Animazione loading.gif
-Quiz in corso	Timer ⏳, domanda, 4 opzioni risposta
-Risultati finali	Punteggio totale + dettaglio ogni risposta
-Statistiche	Progressi per categoria (salvate automaticamente)
-💾 Dove sono salvate le statistiche?
-Tutte le tue statistiche sono salvate nel localStorage del browser con la chiave quizStats. Non preoccuparti, i tuoi record sono al sicuro!
+## 💾 Dove sono salvate le statistiche?
 
-🔧 Tecnologie Usate
-text
+Tutte le tue statistiche sono salvate nel **localStorage** del browser con la chiave `quizStats`. Non preoccuparti, i tuoi record sono al sicuro!
+
+## 🔧 Tecnologie Usate
+
 Frontend: Next.js 14 + React
 Stile: Tailwind CSS con gradienti personalizzati
 Dati: API endpoint /api/quiz
 Persistenza: localStorage
-Animazioni: CSS transitions + hover effects
-🎯 Pronto a iniziare?
-Vai su /categories
+Animazioni: Keyframes + hover effects
 
-Scegli la tua categoria preferita
 
-Buona fortuna! 🍀
+## 🎯 Pronto a iniziare?
 
-Punteggio perfetto = 10/10 🏆
+1. Vai su **/categories** 
+2. Scegli la tua categoria preferita
+3. **Buona fortuna!** 🍀
+
+**Punteggio perfetto = 10/10** 🏆
