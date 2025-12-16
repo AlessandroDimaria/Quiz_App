@@ -1,5 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { playSound } from "../../lib/audio";
+import { categories } from "../categories/page";
 
 export default function useQuizLogic(category) {
   const [questions, setQuestions] = useState([]);
@@ -11,18 +14,26 @@ export default function useQuizLogic(category) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
 
+  // -----------------------------
+  // FETCH DOMANDE
+  // -----------------------------
   useEffect(() => {
     if (!category) return;
 
     setLoading(true);
+
     fetch(`/api/quiz?category=${category}`)
       .then((res) => res.json())
       .then((data) => {
         setQuestions(data);
         setLoading(false);
-      });
+      })
+      .catch(() => setLoading(false));
   }, [category]);
 
+  // -----------------------------
+  // TIMER
+  // -----------------------------
   useEffect(() => {
     if (loading || selected !== null) return;
     if (time === 0) return handleTimeout();
@@ -31,10 +42,52 @@ export default function useQuizLogic(category) {
     return () => clearTimeout(t);
   }, [time, loading, selected]);
 
+  // -----------------------------
+  // SALVATAGGIO PUNTEGGIO
+  // -----------------------------
+  useEffect(() => {
+    if (showAnswers) {
+      saveScoreToLeaderboard(category, score, questions.length);
+    }
+  }, [showAnswers]);
+
+  function saveScoreToLeaderboard(categoryId, score, total) {
+    if (!categoryId) return;
+
+    const key = "quizStats";
+    const raw = localStorage.getItem(key);
+    const data = raw ? JSON.parse(raw) : {};
+
+    const categoryName =
+      categories.find((c) => c.id == categoryId)?.name || "Categoria";
+
+    const entry = data[categoryId] || {
+      categoryName,
+      plays: 0,
+      bestScore: 0,
+      lastScore: 0,
+      averageScore: 0,
+    };
+
+    entry.plays += 1;
+    entry.lastScore = score;
+    entry.bestScore = Math.max(entry.bestScore, score);
+    entry.averageScore =
+      ((entry.averageScore * (entry.plays - 1)) + score) / entry.plays;
+
+    data[categoryId] = entry;
+
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  // -----------------------------
+  // TIMEOUT
+  // -----------------------------
   const handleTimeout = () => {
     if (!questions[index]) return;
 
     setSelected("timeout");
+
     setUserAnswers((prev) => [
       ...prev,
       {
@@ -47,6 +100,9 @@ export default function useQuizLogic(category) {
     setTimeout(nextQuestion, 1200);
   };
 
+  // -----------------------------
+  // CLICK RISPOSTA
+  // -----------------------------
   const answerClick = (ans) => {
     if (selected) return;
 
@@ -73,6 +129,9 @@ export default function useQuizLogic(category) {
     setTimeout(nextQuestion, 1200);
   };
 
+  // -----------------------------
+  // PROSSIMA DOMANDA
+  // -----------------------------
   const nextQuestion = () => {
     if (index + 1 < questions.length) {
       setIndex((i) => i + 1);
