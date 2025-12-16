@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { categories } from "../categories/page";
+import { playSound } from "../../lib/audio";
 
 export default function QuizPage() {
   const searchParams = useSearchParams();
@@ -17,6 +18,7 @@ export default function QuizPage() {
   const [loading, setLoading] = useState(true);
   const [showAnswers, setShowAnswers] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
+  
 
   // ✅ Carica domande
   useEffect(() => {
@@ -100,24 +102,32 @@ export default function QuizPage() {
     setTimeout(nextQuestion, 1200);
   };
 
-  const answerClick = (ans) => {
-    if (selected) return;
-    if (!questions[index]) return;
+const answerClick = (ans) => {
+  if (selected) return;
+  if (!questions[index]) return;
 
-    setUserAnswers((prev) => [
-      ...prev,
-      {
-        question: questions[index].question,
-        correct: questions[index].correct,
-        chosen: ans,
-      },
-    ]);
+  setUserAnswers((prev) => [
+    ...prev,
+    {
+      question: questions[index].question,
+      correct: questions[index].correct,
+      chosen: ans,
+    },
+  ]);
 
-    setSelected(ans);
-    if (ans === questions[index].correct) setScore((s) => s + 1);
+  setSelected(ans);
+  const isCorrect = ans === questions[index].correct;
+  
+  if (isCorrect) {
+    playSound('/sounds/right.mp3', 0.2); // ✅ GIUSTA
+    setScore((s) => s + 1);
+  } else {
+    playSound('/sounds/wrong.mp3', 0.2);  // ❌ SBAGLIATA
+  }
 
-    setTimeout(nextQuestion, 1200);
-  };
+  setTimeout(nextQuestion, 1200);
+};
+
 
   const nextQuestion = () => {
     if (index + 1 < questions.length) {

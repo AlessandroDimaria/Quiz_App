@@ -1,9 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { playSound } from "../lib/audio.js";
 
 export default function Home() {
   const router = useRouter();
+   const handleStartClick = () => {
+    playSound('/sounds/start.wav', 0.3);
+    router.push("/categories");
+  };
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-[#1c192b] relative">
@@ -31,7 +36,7 @@ export default function Home() {
 
       {/* BOTTONE */}
       <button
-        onClick={() => router.push("/categories")}
+        onClick={handleStartClick} 
         className="w-32 h-32 rounded-full text-black text-3xl font-semibold flex items-center justify-center relative cursor-pointer"
         style={{
           background: "radial-gradient(circle, #ffe066, #ffcc00)",

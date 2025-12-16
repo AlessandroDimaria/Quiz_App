@@ -28,6 +28,7 @@ Ogni quiz salva automaticamente i tuoi risultati nel browser! Per ogni categoria
 - **Statistiche salvate localmente** - non perdi mai i progressi
 - **Design moderno** con animazioni fluide
 - **Risposte dettagliate** alla fine del quiz
+- **🎵 Effetti sonori immersivi** per un'esperienza completa
 
 ## 🎨 Interfaccia Utente
 
@@ -50,7 +51,8 @@ Tutte le tue statistiche sono salvate nel **localStorage** del browser e vi si a
 - **Stile**: Tailwind CSS con gradienti personalizzati
 - **Dati**: API endpoint `/app/api/quiz`
 - **Persistenza**: localStorage
-- **Animazioni**: CSS transitions + hover effects
+- **Animazioni**: Keyframes + hover effects
+- **🎵 Audio**: HTML5 Audio
 
 
 ## 🎯 Pronto a iniziare?
